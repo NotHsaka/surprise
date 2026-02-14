@@ -165,7 +165,7 @@ const petalsContainer = document.getElementById("petals");
 for (let i = 0; i < 12; i++) {
     const petal = document.createElement("div");
     petal.className = "petal-piece";
-    petal.style.transform = `rotate(${i * 30}deg)`;  // FIXED
+    petal.style.transform = rotate(${i * 30}deg);
     petalsContainer.appendChild(petal);
 }
 
