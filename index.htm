@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Valentine's 🌻</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #fff9e6, #fff3b0);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Falling petals container */
+.petal {
+    position: fixed;
+    top: -10px;
+    font-size: 20px;
+    animation: fall linear infinite;
+    color: #ffd60a;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(360deg);
+    }
+}
+
+h1 {
+    color: #d4a017;
+    font-size: 2.5rem;
+}
+
+p {
+    color: #444;
+    max-width: 400px;
+    margin: auto;
+}
+
+button {
+    margin-top: 25px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    background-color: #ffd60a;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+/* Popup */
+.popup {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.4s ease;
+}
+
+.popup.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.flower-box {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    transform: scale(0.6);
+    transition: 0.4s ease;
+}
+
+.popup.active .flower-box {
+    transform: scale(1);
+}
+
+/* Sunflower */
+.sunflower-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: auto;
+}
+
+.petals {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    animation: spin 6s linear infinite;
+}
+
+.petal-piece {
+    position: absolute;
+    width: 30px;
+    height: 70px;
+    background: #ffd60a;
+    border-radius: 50%;
+    top: 40px;
+    left: 60px;
+    transform-origin: center 40px;
+}
+
+.center {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    background: #5c3d00;
+    border-radius: 50%;
+    top: 40px;
+    left: 40px;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.close-btn {
+    margin-top: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<div>
+    <h1>Happy Valentine's Day 💛</h1>
+    <p>
+        I made this sunflower because yellow reminds me of someone
+        cheerful, bright, and quietly amazing.
+    </p>
+    <button onclick="openPopup()">Click for your sunflower 🌻</button>
+</div>
+
+<div class="popup" id="popup">
+    <div class="flower-box">
+        <div class="sunflower-container">
+            <div class="petals" id="petals"></div>
+            <div class="center"></div>
+        </div>
+        <h2>You deserve something that never stops blooming 💛</h2>
+        <button class="close-btn" onclick="closePopup()">Close</button>
+    </div>
+</div>
+
+<script>
+// Create spinning petals
+const petalsContainer = document.getElementById("petals");
+
+for (let i = 0; i < 12; i++) {
+    const petal = document.createElement("div");
+    petal.className = "petal-piece";
+    petal.style.transform = `rotate(${i * 30}deg)`;  // FIXED
+    petalsContainer.appendChild(petal);
+}
+
+// Popup functions
+function openPopup() {
+    document.getElementById("popup").classList.add("active");
+}
+
+function closePopup() {
+    document.getElementById("popup").classList.remove("active");
+}
+
+// Falling yellow petals animation
+function createFallingPetal() {
+    const petal = document.createElement("div");
+    petal.className = "petal";
+    petal.innerHTML = "🌼";
+    petal.style.left = Math.random() * 100 + "vw";
+    petal.style.animationDuration = (3 + Math.random() * 5) + "s";
+    petal.style.fontSize = (15 + Math.random() * 20) + "px";
+    document.body.appendChild(petal);
+
+    setTimeout(() => {
+        petal.remove();
+    }, 8000);
+}
+
+setInterval(createFallingPetal, 300);
+</script>
+
+</body>
+</html>
